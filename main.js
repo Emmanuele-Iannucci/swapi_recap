@@ -7,27 +7,41 @@ const peopleList = document.getElementById("app");
 fetch(ApiUrl)
     .then(res => res.json())
     .then(people => {
-        // people è un array di personaggi
         people.forEach(person => {
-            // creo un elemento <li>
-            const liEl = document.createElement("li");
-            // ci metto dentro il nome
-            liEl.innerText = `
-        Nome: ${person.name}
-        Altezza: ${person.height}
-        Peso: ${person.mass}
-        Colore capelli: ${person.hair_color}
-        Colore occhi: ${person.eye_color}
-        Genere: ${person.gender}
-      `;
+            // 1. creo il contenitore della card
+            const card = document.createElement("div");
 
-            // stampo su console per debug
-            console.log(liEl);
+            // 2. nome in evidenza
+            const title = document.createElement("h2");
+            title.innerText = person.name;
+            card.appendChild(title);
 
-            // aggiungo al DOM
-            peopleList.appendChild(liEl);
+            // 3. le altre caratteristiche in paragrafi
+            const height = document.createElement("p");
+            height.innerText = "Altezza: " + person.height;
+            card.appendChild(height);
+
+            const mass = document.createElement("p");
+            mass.innerText = "Peso: " + person.mass;
+            card.appendChild(mass);
+
+            const hair = document.createElement("p");
+            hair.innerText = "Colore capelli: " + person.hair_color;
+            card.appendChild(hair);
+
+            const eyes = document.createElement("p");
+            eyes.innerText = "Colore occhi: " + person.eye_color;
+            card.appendChild(eyes);
+
+            const gender = document.createElement("p");
+            gender.innerText = "Genere: " + person.gender;
+            card.appendChild(gender);
+
+            // Stampo le card in console
+            console.log(card)
+
+            // 4. appendo la card al contenitore principale
+            peopleList.appendChild(card);
         });
     })
-    .catch(err => {
-        console.error("Errore:", err.message);
-    });
+    .catch(err => console.error("Errore:", err));
