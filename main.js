@@ -1,16 +1,26 @@
 // URL dell'endpoint
 const ApiUrl = "https://swapi.info/api/people";
 
-// Contenitore del DOM
-let app = document.getElementById("app");
+// seleziono l'elemento <ul> dove mettere i personaggi
+const peopleList = document.getElementById("app");
 
-// Funzione per creare la card del personaggio
-function CreaCardPerson(personaggio) {
+fetch(ApiUrl)
+    .then(res => res.json())
+    .then(people => {
+        // people è un array di personaggi
+        people.forEach(person => {
+            // creo un elemento <li>
+            const liEl = document.createElement("li");
+            // ci metto dentro il nome
+            liEl.innerText = person.name;
 
-    // contenitore div
-    let card = document.createElement("div");
+            // stampo su console per debug
+            console.log(liEl);
 
-
-}
-
-
+            // aggiungo al DOM
+            peopleList.appendChild(liEl);
+        });
+    })
+    .catch(err => {
+        console.error("Errore:", err.message);
+    });
