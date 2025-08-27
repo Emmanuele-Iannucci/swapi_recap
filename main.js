@@ -12,7 +12,14 @@ fetch(ApiUrl)
             // creo un elemento <li>
             const liEl = document.createElement("li");
             // ci metto dentro il nome
-            liEl.innerText = person.name;
+            liEl.innerText = `
+        Nome: ${person.name}
+        Altezza: ${person.height}
+        Peso: ${person.mass}
+        Colore capelli: ${person.hair_color}
+        Colore occhi: ${person.eye_color}
+        Genere: ${person.gender}
+      `;
 
             // stampo su console per debug
             console.log(liEl);
